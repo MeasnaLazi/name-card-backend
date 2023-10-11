@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { modelMessage } = require("../utils/ConstUtil");
+const { schema } = require("../utils/ConstUtil");
 
 const nameCardSchema = mongoose.Schema({
     firstname: { 
@@ -10,4 +10,4 @@ const nameCardSchema = mongoose.Schema({
     middlename: String,
 });
 
-mongoose.model(modelMessage.NAME_CARD, nameCardSchema, modelMessage.NAME_CARDS_COLLECTION);
+mongoose.model(schema.NAME_CARD_MODEL, nameCardSchema, schema.NAME_CARDS_COLLECTION);

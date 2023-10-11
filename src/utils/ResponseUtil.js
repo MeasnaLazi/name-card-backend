@@ -10,6 +10,12 @@ const setResponse = (response, code, message) => {
     response.message = message;
 }
 
+const setResponseWithData = (response, code, message, data) => {
+    response.code = code;
+    response.message = message;
+    response.data = data;
+}
+
 const setInternalError = (response, error) => {
     response.code = httpCode.INTERNAL_ERROR;
     response.message = error;
@@ -31,4 +37,5 @@ module.exports = {
     setInternalError,
     setNotFoundError,
     sendResponse,
+    setResponseWithData,
 }

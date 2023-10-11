@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
 const { mongooseMessage } = require("../utils/ConstUtil");
 
+require("../models/User");
 require("../models/NameCard");
 
-console.log("process.env.DB_URL: " + process.env.DB_URL);
+const { initDummyData } = require("./DummyData");
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on("connected", function() {
     console.log(mongooseMessage.CONNECTED + " : " + process.env.PORT);
+    initDummyData();
 });
 
 mongoose.connection.on("disconnected", function() {

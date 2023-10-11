@@ -1,6 +1,8 @@
 require("dotenv").config();
 require("./database/DBConnection");
 
+const { httpCode } = require("./utils/ConstUtil");
+const { expressjwt } = require("express-jwt");
 const express = require("express");
 const app = express();
 const router = require("./routers/Route");
@@ -12,6 +14,39 @@ app.use(function (req, res, next) {
     // res.header("Access-Control-Allow-Origin", process.env.FRONT_END_URL);
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+const createMiddlewareJWT = () => {
+    let jwt = expressjwt({ secret: process.env.JWT_SECRET_KEY, algorithms: ["HS256"] });
+    jwt.unless({
+        path: [
+            // /\/api\/v1\/account*/,
+            "/api/v1/account/login"
+        ],
+    });
+
+    return jwt;
+}
+
+// app.use(createMiddlewareJWT());
+
+app.use((err, req, res, next) => {
+    if (err) {
+        if (err.status === httpCode.UNAUTHORIZED) {
+            return res.status(err.status)
+                        .send({
+                            status: err.status,
+                            message: err.message,
+                        });
+        } else {
+            return res.status(err.status)
+                        .send({
+                            status: err.status,
+                            message: "Invalid Token request.",
+                        });
+        }
+    }
     next();
 });
 
