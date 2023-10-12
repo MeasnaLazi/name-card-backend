@@ -8,14 +8,6 @@ const httpCode = {
     UNAUTHORIZED: 401,
 }
 
-const route = {
-    HOME : "/",
-    NAME_CARD : "/name-card",
-    NAME_CARD_ID : "/:name_card_id",
-    ACCOUNT: "/account",
-    LOGIN: "/login"
-}
-
 const mongooseMessage = {
     CONNECTED : "Mongoose connected to port",
     DISCONNECTED : "Mongoose disconnected to port",
@@ -29,5 +21,23 @@ const schema = {
     USER_MODEL : "User",
     USERS_COLLECTION : "users",
 };
+
+const routeNameCard = {
+    NAME : "/name-card",
+    HOME : "/",
+    ID : "/:name_card_id",
+}
+
+const routeAccount = {
+    NAME: "/account",
+    HOME: "/",
+    LOGIN: "/login"
+}
+
+const route = {
+    HOME : "/",
+    NAME_CARD: routeNameCard,
+    ACCOUNT: routeAccount,
+}
 
 module.exports = { message, httpCode, route, mongooseMessage, schema };

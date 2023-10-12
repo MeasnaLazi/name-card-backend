@@ -4,7 +4,7 @@ const { route } = require("../utils/ConstUtil");
 
 const router = express.Router();
 
-router.route(route.NAME_CARD_ID)
+router.route(route.NAME_CARD.ID)
     .get(nameCardController.readNameCard)
     .patch(nameCardController.updateNameCard)
     .put(nameCardController.updateNameCard)

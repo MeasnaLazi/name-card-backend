@@ -4,7 +4,7 @@ const { route } = require("../utils/ConstUtil");
 
 const router = express.Router();
 
-router.route(route.HOME)
+router.route(route.ACCOUNT.LOGIN)
     .put(userController.login)
     
 module.exports = router;
