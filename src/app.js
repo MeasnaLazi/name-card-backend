@@ -18,18 +18,16 @@ app.use(function (req, res, next) {
 });
 
 const createMiddlewareJWT = () => {
-    let jwt = expressjwt({ secret: process.env.JWT_SECRET_KEY, algorithms: ["HS256"] });
-    jwt.unless({
-        path: [
-            // /\/api\/v1\/account*/,
-            "/api/v1/account/login"
-        ],
-    });
-
-    return jwt;
+    return expressjwt({ secret: process.env.JWT_SECRET_KEY, algorithms: ["HS256"] })
+            .unless({
+                path: [
+                    // /\/api\/v1\/account*/,
+                    "/api/v1/account/login"
+                ],
+            });
 }
 
-// app.use(createMiddlewareJWT());
+app.use(createMiddlewareJWT());
 
 app.use((err, req, res, next) => {
     if (err) {
