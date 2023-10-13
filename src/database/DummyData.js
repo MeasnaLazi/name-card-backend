@@ -1,6 +1,6 @@
 const userService = require("../services/UserService");
 
-const initDummyData = () => {
+const checkIfNoUserThenInitUser = () => {
     userService.isUserExist()
         .then(exist => {
             if (!exist) {
@@ -17,6 +17,6 @@ const _createFirstUser = () => {
 }
 
 module.exports = { 
-    initDummyData 
+    checkIfNoUserThenInitUser 
 };
 

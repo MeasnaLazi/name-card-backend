@@ -4,13 +4,18 @@ const { mongooseMessage } = require("../utils/ConstUtil");
 require("../models/User");
 require("../models/NameCard");
 
-const { initDummyData } = require("./DummyData");
+const { checkIfNoUserThenInitUser } = require("./DummyData");
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on("connected", function() {
     console.log(mongooseMessage.CONNECTED + " : " + process.env.PORT);
-    initDummyData();
+
+    if (process.env.NODE_ENV == 'test') {
+        console.log("drop database!");
+    }
+    
+    checkIfNoUserThenInitUser();
 });
 
 mongoose.connection.on("disconnected", function() {

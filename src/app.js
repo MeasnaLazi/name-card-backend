@@ -1,7 +1,4 @@
-const dotEnv = require("dotenv");
-dotEnv.config();
-dotEnv.config({path : `.env.${process.env.NODE_ENV}`});
-
+require("./utils/DotEnvUtil");
 require("./database/DBConnection");
 
 const { httpCode } = require("./utils/ConstUtil");
