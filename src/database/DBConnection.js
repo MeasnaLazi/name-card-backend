@@ -13,9 +13,10 @@ mongoose.connection.on("connected", function() {
 
     if (process.env.NODE_ENV == 'test') {
         console.log("drop database!");
+        mongoose.connection.db.dropDatabase();
     }
     
-    checkIfNoUserThenInitUser();
+    // checkIfNoUserThenInitUser();
 });
 
 mongoose.connection.on("disconnected", function() {
@@ -27,7 +28,7 @@ mongoose.connection.on("error", function(err) {
 });
 
 process.on("SIGINT", function() {
-    mongoose.connection.close(function(){
+    mongoose.connection.close().then(() => {
         console.log(mongooseMessage.DISCONNECTED_BY_APP + " : " + process.env.PORT)
         process.exit(0);
     })

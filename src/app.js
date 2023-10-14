@@ -1,4 +1,4 @@
-require("./utils/DotEnvUtil");
+require("./configs/DotEnvConfig");
 require("./database/DBConnection");
 
 const { httpCode } = require("./utils/ConstUtil");
@@ -54,4 +54,3 @@ const server = app.listen(process.env.PORT, function(req, res) {
     const port = server.address().port;
     console.log("The server is running port: " + port)
 });
-
