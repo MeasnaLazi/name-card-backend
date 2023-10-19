@@ -6,23 +6,25 @@
   "scripts": {
     "start": "NODE_ENV=production node src/app.js",
     "dev": "NODE_ENV=development node src/app.js",
-    "test": "NODE_ENV=test node src/app.js",
-    "testing": "mocha 'test/**/*.js' --recursive"
+    "test-server": "NODE_ENV=test node src/app.js",
+    "test": "mocha 'test/**/*.js' --recursive",
+    "test-coverage": "nyc --reporter=text npm run test"
   },
   "author": "Lazi",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "chai": "^4.3.10",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-jwt": "^8.4.1",
     "jsonwebtoken": "^9.0.2",
-    "mocha": "^10.2.0",
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.1"
   },
   "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "supertest": "^6.3.3"
   }
 }

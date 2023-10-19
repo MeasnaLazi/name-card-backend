@@ -1,7 +1,7 @@
 const { message, httpCode } = require("./ConstUtil");;
 
 const initializeResponse = (code, message) => {
-    const response = { code: code, message: message, data: {} };
+    const response = { code: code, error: 0, message: message, data: {} };
     return response;
 };
 
@@ -19,16 +19,27 @@ const setResponseWithData = (response, code, message, data) => {
 const setInternalError = (response, error) => {
     response.code = httpCode.INTERNAL_ERROR;
     response.message = error;
+    response.data = undefined;
+    response.error = 1;
 }
 
-const setNotFoundError = (response, error) => {
+const setNotFoundError = (response, message) => {
     response.code = httpCode.NOT_FOUND;
-    response.message = message.NOT_FOUND;
+    response.message = message;
+    response.data = undefined;
+    response.error = 1;
+}
+
+const setUnauthorizedError = (response, message) => {
+    response.code = httpCode.UNAUTHORIZED;
+    response.message = message;
+    response.data = undefined;
+    response.error = 1;
 }
 
 const sendResponse = (res, response) => {
     let code = parseInt(response.code);
-    res.status(code).json({ message: response.message, data: response.data });
+    res.status(code).json({ error: response.error, message: response.message, data: response.data });
 }
 
 module.exports = {
@@ -36,6 +47,7 @@ module.exports = {
     setResponse,
     setInternalError,
     setNotFoundError,
+    setUnauthorizedError,
     sendResponse,
     setResponseWithData,
 }
