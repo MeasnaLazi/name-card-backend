@@ -1,7 +1,7 @@
 
 const { request, api, getCredential, credential } = require("./api-data");
 const { expect } = require("chai");
-const { textMessage, httpCode } = require("./utils");
+const { textMessage, httpCode } = require("./utils.test");
 
 describe("[Authentication]", async () => {
     

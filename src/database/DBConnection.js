@@ -9,13 +9,7 @@ const { checkIfNoUserThenInitUser } = require("./DummyData");
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on("connected", function() {
-    console.log(mongooseMessage.CONNECTED + " : " + process.env.PORT);
-
-    if (process.env.NODE_ENV == 'test') {
-        console.log("drop database!");
-        mongoose.connection.db.dropDatabase();
-    }
-    
+    console.log(mongooseMessage.CONNECTED + " : " + process.env.PORT);    
     // checkIfNoUserThenInitUser();
 });
 
