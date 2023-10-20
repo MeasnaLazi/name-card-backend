@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node src/app.js",
     "dev": "NODE_ENV=development node src/app.js",
-    "test-server": "NODE_ENV=test node src/app.js",
+    "test": "NODE_ENV=test node src/app.js",
     "test-api": "mocha 'test/api/**/*.js' --recursive && exit 1",
     "test-service": "mocha 'test/service/main.test.js' && exit 1",
     "test-coverage": "nyc --reporter=text npm run test-service"
