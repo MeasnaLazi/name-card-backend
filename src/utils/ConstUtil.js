@@ -34,10 +34,16 @@ const routeAccount = {
     LOGIN: "/login"
 }
 
+const routeScan = {
+    NAME : "/scan",
+    HOME: "/",
+}
+
 const route = {
     HOME : "/",
     NAME_CARD: routeNameCard,
     ACCOUNT: routeAccount,
+    SCAN: routeScan,
 }
 
 module.exports = { message, httpCode, route, mongooseMessage, schema };
