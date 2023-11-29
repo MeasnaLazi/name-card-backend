@@ -1,4 +1,5 @@
-const { initializeResponse, setResponse, sendResponse } = require("../utils/ResponseUtil");
+const { initializeResponse, setResponse, sendResponse, setInternalError, setResponseWithData } = require("../utils/ResponseUtil");
+const nameCardService = require("../services/NameCardService");
 
 const createNameCard = (req, res) => {
     const response = initializeResponse();
@@ -34,10 +35,27 @@ const deleteNameCard = (req, res) => {
     sendResponse(res, response);
 }
 
+const readAllNameCard = (req, res) => {
+
+    const response = initializeResponse();
+
+    nameCardService.getAllNameCards()
+        .then(cards => {
+            setResponseWithData(response, 200, "Retrieve successful!", cards);
+        })
+        .catch(err => {
+            setInternalError(response, err)
+        })
+        .finally(() => {
+            sendResponse(res, response)
+        })
+}
+
 module.exports = {
     createNameCard,
     readNameCard,
     updateNameCard,
     deleteNameCard,
+    readAllNameCard
 }
 

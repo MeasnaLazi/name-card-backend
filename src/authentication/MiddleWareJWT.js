@@ -5,7 +5,8 @@ const createMiddlewareJWT = () => {
             .unless({
                 path: [
                     // /\/api\/v1\/account*/,
-                    "/api/v1/account/login"
+                    "/api/v1/account/login",
+                    /\/image*/,
                 ],
             });
 }

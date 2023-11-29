@@ -9,24 +9,14 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const router = require("./routers/Route");
+const mediaRouter = require("./routers/MediaRoute");
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// const createMiddlewareJWT = () => {
-//     return expressjwt({ secret: process.env.JWT_SECRET_KEY, algorithms: ["HS256"] })
-//             .unless({
-//                 path: [
-//                     // /\/api\/v1\/account*/,
-//                     "/api/v1/account/login"
-//                 ],
-//             });
-// }
-
-// app.use(createMiddlewareJWT());
 app.use(middlewareJWT());
 app.use(process.env.END_POINT, router);
+app.use("/", mediaRouter);
 app.use(exceptionHandler);
 
 const server = app.listen(process.env.PORT, function(req, res) {

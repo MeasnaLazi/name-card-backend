@@ -39,11 +39,16 @@ const routeScan = {
     HOME: "/",
 }
 
+const routeMedia = {
+    IMAGE : "/image",
+}
+
 const route = {
     HOME : "/",
     NAME_CARD: routeNameCard,
     ACCOUNT: routeAccount,
     SCAN: routeScan,
+    MEDIA: routeMedia,
 }
 
 module.exports = { message, httpCode, route, mongooseMessage, schema };

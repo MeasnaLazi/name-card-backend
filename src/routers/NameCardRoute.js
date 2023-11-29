@@ -12,6 +12,7 @@ router.route(route.NAME_CARD.ID)
 
 router.route(route.HOME)
     .post(nameCardController.createNameCard)
+    .get(nameCardController.readAllNameCard)
     
 module.exports = router;
 
