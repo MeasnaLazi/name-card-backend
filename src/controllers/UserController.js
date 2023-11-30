@@ -8,7 +8,6 @@ const login = (req, res) => {
 
     userService.login(username, password)
                 .then(token => {
-                    console.log(token);
                     setResponseWithData(response, 200, "Login successful!", { token: token });
                 })
                 .catch(err => {
