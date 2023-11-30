@@ -23,19 +23,16 @@ const schema = {
 };
 
 const routeNameCard = {
-    NAME : "/name-card",
     HOME : "/",
     ID : "/:name_card_id",
 }
 
 const routeAccount = {
-    NAME: "/account",
     HOME: "/",
     LOGIN: "/login"
 }
 
 const routeScan = {
-    NAME : "/scan",
     HOME: "/",
 }
 
