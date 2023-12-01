@@ -13,21 +13,24 @@ const checkIfNoUserThenInitUser = () => {
 
 const _createFirstUser = () => {
     userService.createUser("measna@lazi.com", "lazi", "12345678")
-                .then(user => console.log("First User Create Successful!"))
+                .then(user => {
+                    console.log("First User Create Successful!")
+                    checkIfCreateSampleNameCards(user)
+                })
                 .catch(err => console.log("Create User: " + err));
 }
 
-const checkIfCreateSampleNameCards = () => {
+const checkIfCreateSampleNameCards = (user) => {
     nameCardService.isNameCardExist()
         .then(exist => {
             if (!exist) {
-                _createNameCards();
+                _createNameCards(user);
             }
         })
         .catch(err => console.log("error: " + err));
 }
 
-const _createNameCards = () => {
+const _createNameCards = (user) => {
     let nameCards = [
         {
             firstname: "Sovannmeasna",
@@ -39,6 +42,7 @@ const _createNameCards = () => {
             website: "https://spacianet.com.kh",
             company: "SpaciaNet",
             image: "sample.jpg",
+            created_by: user,
         },
         {
             firstname: "Mariana",
@@ -49,6 +53,7 @@ const _createNameCards = () => {
             address: "123 Anywhere St., Any City",
             website: "www.reallygreatsite.com",
             image: "sample1.jpg",
+            created_by: user,
         },
         {
             firstname: "DANI",
@@ -59,6 +64,7 @@ const _createNameCards = () => {
             address: "123 Anywhere St., Any City",
             website: "www.reallygreatsite.com",
             image: "sample2.jpg",
+            created_by: user,
         }
     ]
     nameCardService.createNameCards(nameCards)
@@ -68,7 +74,6 @@ const _createNameCards = () => {
 
 const initDummyData = () => {
     checkIfNoUserThenInitUser();
-    checkIfCreateSampleNameCards();
 }
 
 module.exports = { 

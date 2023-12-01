@@ -73,7 +73,7 @@ const _generateToken = (user) => {
     const expiresIn = process.env.JWT_TOKEN_EXPIRES;
     const jwtSign = util.promisify(jwt.sign);
 
-    return jwtSign({ email: user.email }, secretKey, { expiresIn: expiresIn });
+    return jwtSign({ user_id: user._id }, secretKey, { expiresIn: expiresIn });
 }
 
 module.exports = {

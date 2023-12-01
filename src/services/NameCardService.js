@@ -33,11 +33,10 @@ const isNameCardExist = () => {
             .catch((error) => Promise.reject(error));
 }
 
-const getAllNameCards = () => {
-    return NameCard.find()
+const getAllNameCards = (userId) => {
+    return NameCard.find({ created_by: userId })
             .then(nameCards => Promise.resolve(nameCards))
             .catch((error) => Promise.reject(error));
-
 }
 
 module.exports = {

@@ -1,5 +1,6 @@
-const { initializeResponse, setResponse, sendResponse, setInternalError, setResponseWithData } = require("../utils/ResponseUtil");
+const { initializeResponse, setResponse, sendResponse, setInternalError, setResponseWithData, setUnauthorizedError } = require("../utils/ResponseUtil");
 const nameCardService = require("../services/NameCardService");
+const verifyRequest = require("../utils/AuthUtil")
 
 const createNameCard = (req, res) => {
     const response = initializeResponse();
@@ -37,9 +38,16 @@ const deleteNameCard = (req, res) => {
 
 const readAllNameCard = (req, res) => {
 
+    const verify = verifyRequest(req);
     const response = initializeResponse();
 
-    nameCardService.getAllNameCards()
+    if (!verify) {
+        setUnauthorizedError(response, "Invalid Token!")
+        sendResponse(res, response)
+        return
+    }
+
+    nameCardService.getAllNameCards(verify.userId)
         .then(cards => {
             setResponseWithData(response, 200, "Retrieve successful!", cards);
         })
