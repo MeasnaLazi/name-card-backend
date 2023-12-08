@@ -42,7 +42,7 @@ const _createNameCards = (user) => {
             website: "https://spacianet.com.kh",
             company: "SpaciaNet",
             image: "sample.jpg",
-            created_by: user,
+            owner: user,
         },
         {
             firstname: "Mariana",
@@ -53,7 +53,7 @@ const _createNameCards = (user) => {
             address: "123 Anywhere St., Any City",
             website: "www.reallygreatsite.com",
             image: "sample1.jpg",
-            created_by: user,
+            owner: user,
         },
         {
             firstname: "DANI",
@@ -64,7 +64,7 @@ const _createNameCards = (user) => {
             address: "123 Anywhere St., Any City",
             website: "www.reallygreatsite.com",
             image: "sample2.jpg",
-            created_by: user,
+            owner: user,
         }
     ]
     nameCardService.createNameCards(nameCards)

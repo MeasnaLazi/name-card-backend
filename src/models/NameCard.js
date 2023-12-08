@@ -30,7 +30,7 @@ const nameCardSchema = mongoose.Schema({
         require: true 
     },
     back_image: String,
-    created_by: { type: mongoose.Types.ObjectId, ref: "User" }
+    owner: { type: mongoose.Types.ObjectId, ref: "User" }
 });
 
 mongoose.model(schema.NAME_CARD_MODEL, nameCardSchema, schema.NAME_CARDS_COLLECTION);

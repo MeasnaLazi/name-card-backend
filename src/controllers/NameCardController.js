@@ -1,61 +1,66 @@
-const { initializeResponse, setResponse, sendResponse, setInternalError, setResponseWithData, setUnauthorizedError } = require("../utils/ResponseUtil");
+const responseUtil = require("../utils/ResponseUtil");
 const nameCardService = require("../services/NameCardService");
 const verifyRequest = require("../utils/AuthUtil")
 
 const createNameCard = (req, res) => {
-    const response = initializeResponse();
+    const response = responseUtil.initializeResponse();
 
-    setResponse(res, 200, "creat call");
+    responseUtil.setResponse(res, 200, "creat call");
 
-    sendResponse(res, response);
+    responseUtil.sendResponse(res, response);
 }
 
 const readNameCard = (req, res) => {
-    const response = initializeResponse();
+    const response = responseUtil.initializeResponse();
 
-    setResponse(response, 200, "red call");
+    responseUtil.setResponse(response, 200, "red call");
 
-    console.log()
-
-    sendResponse(res, response);
+    responseUtil.sendResponse(res, response);
 }
 
 const updateNameCard = (req, res) => {
-    const response = initializeResponse();
+    const response = responseUtil.initializeResponse();
 
-    setResponse(res, 200, "update call");
+    responseUtil.setResponse(res, 200, "update call");
 
-    sendResponse(res, response);
+    responseUtil.sendResponse(res, response);
 }
 
 const deleteNameCard = (req, res) => {
-    const response = initializeResponse();
+    const response = responseUtil.initializeResponse();
 
-    setResponse(res, 200, "delete call");
+    responseUtil.setResponse(res, 200, "delete call");
 
-    sendResponse(res, response);
+    responseUtil.sendResponse(res, response);
 }
 
-const readAllNameCard = (req, res) => {
+const readNameCards = async (req, res) => {
 
     const verify = verifyRequest(req);
-    const response = initializeResponse();
+    const response = responseUtil.initializeResponse();
 
     if (!verify) {
-        setUnauthorizedError(response, "Invalid Token!")
-        sendResponse(res, response)
+        responseUtil.setUnauthorizedError(response, "Invalid Token!")
+        responseUtil.sendResponse(res, response)
         return
     }
 
-    nameCardService.getAllNameCards(verify.userId)
+    const perPage = process.env.PER_PAGE
+    const page = req.query.page ? req.query.page : 1
+    const search = req.query.search ? req.query.search : ""
+    const userId = verify.userId;
+    const count = await nameCardService.countNameCard(userId, search);
+    const totalPage = Math.ceil(count / perPage)
+
+    nameCardService.getNameCards(verify.userId, page, search)
         .then(cards => {
-            setResponseWithData(response, 200, "Retrieve successful!", cards);
+            responseUtil.setResponseWithDataPage(response, 200, "Retrieve successful!", cards, count, totalPage);
         })
         .catch(err => {
-            setInternalError(response, err)
+            responseUtil.setInternalError(response, err)
         })
         .finally(() => {
-            sendResponse(res, response)
+            responseUtil.sendResponse(res, response)
         })
 }
 
@@ -64,6 +69,6 @@ module.exports = {
     readNameCard,
     updateNameCard,
     deleteNameCard,
-    readAllNameCard
+    readNameCards
 }
 

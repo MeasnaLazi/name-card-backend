@@ -16,6 +16,12 @@ const setResponseWithData = (response, code, message, data) => {
     response.data = data;
 }
 
+const setResponseWithDataPage = (response, code, message, data, count, total_page) => {
+    setResponseWithData(response, code, message, data)
+    response.count = count
+    response.total_page = total_page
+}
+
 const setInternalError = (response, error) => {
     response.code = httpCode.INTERNAL_ERROR;
     response.message = error;
@@ -39,7 +45,7 @@ const setUnauthorizedError = (response, message) => {
 
 const sendResponse = (res, response) => {
     let code = parseInt(response.code);
-    res.status(code).json({ error: response.error, message: response.message, data: response.data });
+    res.status(code).json(response);
 }
 
 module.exports = {
@@ -50,4 +56,5 @@ module.exports = {
     setUnauthorizedError,
     sendResponse,
     setResponseWithData,
+    setResponseWithDataPage
 }

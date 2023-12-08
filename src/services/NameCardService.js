@@ -33,15 +33,80 @@ const isNameCardExist = () => {
             .catch((error) => Promise.reject(error));
 }
 
-const getAllNameCards = (userId) => {
-    return NameCard.find({ created_by: userId })
+const getNameCards = (userId, page, search) => {
+
+    const perPage = process.env.PER_PAGE
+    const skip = (perPage * page) - perPage
+
+    const filter = { 
+        owner: userId 
+    }
+
+    if (search != "") {
+        const searchQuery = _createSearchQuery(search)
+        filter['$or'] = searchQuery
+    }
+
+    return NameCard.find(filter)
+            .skip(skip)
+            .limit(perPage)
             .then(nameCards => Promise.resolve(nameCards))
             .catch((error) => Promise.reject(error));
+}
+
+const countNameCard = (userId, search) => {
+
+    const filter = { 
+        owner: userId 
+    }
+
+    if (search != "") {
+        const searchQuery = _createSearchQuery(search)
+        filter['$or'] = searchQuery
+    }
+
+    return NameCard.count(filter)
+}
+
+const _createSearchQuery = (search) => {
+    const searchRegex = ".*" + search + "*."
+    return [
+            { 
+                firstname: { 
+                    $regex: searchRegex,
+                    $options:'i' 
+                },
+            },
+            {   lastname: { 
+                    $regex: searchRegex,
+                    $options:'i'
+                },
+            },
+            {   
+                position: { 
+                    $regex: searchRegex,
+                    $options:'i'
+                },
+            },
+            {
+                phone: { 
+                    $regex: searchRegex,
+                    $options:'i'
+                },
+            },
+            {
+                email: { 
+                    $regex: searchRegex,
+                    $options:'i'
+                },
+            },
+        ]
 }
 
 module.exports = {
     createNameCard,
     isNameCardExist,
     createNameCards,
-    getAllNameCards
+    getNameCards,
+    countNameCard
 }
