@@ -1,5 +1,6 @@
 const userService = require("../services/UserService");
 const nameCardService = require("../services/NameCardService");
+const profileService = require("../services/ProfileService");
 
 const checkIfNoUserThenInitUser = () => {
     userService.isUserExist()
@@ -24,14 +25,15 @@ const checkIfCreateSampleNameCards = (user) => {
     nameCardService.isNameCardExist()
         .then(exist => {
             if (!exist) {
+                _createProfiles(user)
                 _createNameCards(user);
             }
         })
         .catch(err => console.log("error: " + err));
 }
 
-const _createNameCards = (user) => {
-    let nameCards = [
+const _createProfiles = (user) => {
+    let profiles = [
         {
             firstname: "Sovannmeasna",
             lastname: "Ly",
@@ -44,6 +46,15 @@ const _createNameCards = (user) => {
             image: "sample.jpg",
             owner: user,
         },
+    ]
+
+    profileService.createProfiles(profiles)
+                .then(_ => console.log("Dummy Profile create successful!"))
+                .catch(err => console.log("Dummy Profile create: " + err));
+}
+
+const _createNameCards = (user) => {
+    let nameCards = [
         {
             firstname: "Mariana",
             lastname: "Anderson",
@@ -54,6 +65,7 @@ const _createNameCards = (user) => {
             website: "www.reallygreatsite.com",
             image: "sample1.jpg",
             owner: user,
+            profile: null,
         },
         {
             firstname: "DANI",
@@ -65,10 +77,11 @@ const _createNameCards = (user) => {
             website: "www.reallygreatsite.com",
             image: "sample2.jpg",
             owner: user,
+            profile: null,
         }
     ]
     nameCardService.createNameCards(nameCards)
-                .then(cards => console.log("Dummy Name Card create successful!"))
+                .then(_ => console.log("Dummy Name Card create successful!"))
                 .catch(err => console.log("Dummy Name Card create: " + err));
 }
 

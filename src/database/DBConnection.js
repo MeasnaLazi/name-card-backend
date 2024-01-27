@@ -3,6 +3,7 @@ const { mongooseMessage } = require("../utils/ConstUtil");
 
 require("../models/User");
 require("../models/NameCard");
+require("../models/Profile");
 
 const { initDummyData } = require("./DummyData");
 

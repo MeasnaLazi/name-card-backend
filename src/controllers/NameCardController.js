@@ -45,9 +45,10 @@ const readNameCards = async (req, res) => {
         return
     }
 
-    const perPage = process.env.PER_PAGE
     const page = req.query.page ? req.query.page : 1
     const search = req.query.search ? req.query.search : ""
+
+    const perPage = process.env.PER_PAGE
     const userId = verify.userId;
     const count = await nameCardService.countNameCard(userId, search);
     const totalPage = Math.ceil(count / perPage)

@@ -20,6 +20,8 @@ const schema = {
     NAME_CARDS_COLLECTION : "namecards",
     USER_MODEL : "User",
     USERS_COLLECTION : "users",
+    PROFILE_MODEL : "Profile",
+    PROFILES_COLLECTION : "profiles",
 };
 
 const routeNameCard = {
@@ -37,15 +39,20 @@ const routeScan = {
 }
 
 const routeMedia = {
-    IMAGE : "/image",
+    IMAGE: "/image",
+}
+
+const routeProfile = {
+    ID: "/:id",
 }
 
 const route = {
-    HOME : "/",
+    HOME: "/",
     NAME_CARD: routeNameCard,
     ACCOUNT: routeAccount,
     SCAN: routeScan,
     MEDIA: routeMedia,
+    PROFILE: routeProfile,
 }
 
 module.exports = { message, httpCode, route, mongooseMessage, schema };

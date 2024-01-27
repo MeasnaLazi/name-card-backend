@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 const { schema } = require("../utils/ConstUtil");
 
-// TODO: 
-// Address: should be an other object?
-// Phone: should be an array?
-const nameCardSchema = mongoose.Schema({
+const profileSchema = mongoose.Schema({
     firstname: { 
         type : String, 
         require: true 
@@ -31,7 +28,6 @@ const nameCardSchema = mongoose.Schema({
     },
     back_image: String,
     owner: { type: mongoose.Types.ObjectId, ref: "User" },
-    profile: { type: mongoose.Types.ObjectId, ref: "Profile" }
 });
 
-mongoose.model(schema.NAME_CARD_MODEL, nameCardSchema, schema.NAME_CARDS_COLLECTION);
+mongoose.model(schema.PROFILE_MODEL, profileSchema, schema.PROFILES_COLLECTION);

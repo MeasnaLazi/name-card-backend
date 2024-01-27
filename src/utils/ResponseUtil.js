@@ -45,6 +45,7 @@ const setUnauthorizedError = (response, message) => {
 
 const sendResponse = (res, response) => {
     let code = parseInt(response.code);
+    delete response.code
     res.status(code).json(response);
 }
 

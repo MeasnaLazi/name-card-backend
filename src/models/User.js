@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const { schema } = require("../utils/ConstUtil");
 
 const userSchema = mongoose.Schema({
-    email : {
+    email: {
         type : String,
         required: true
     },
-    username : {
+    username: {
         type: String,
         required: true,
         unique: true
