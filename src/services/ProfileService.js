@@ -8,6 +8,18 @@ const createProfiles = (profiles) => {
         .catch((error) => Promise.reject(error));
 };
 
+const getProfiles = (userId) => {
+
+    const filter = { 
+        owner: userId 
+    }
+
+    return Profile.find(filter)
+            .then(profiles => Promise.resolve(profiles))
+            .catch((error) => Promise.reject(error));
+}
+
 module.exports = {
     createProfiles,
+    getProfiles,
 }

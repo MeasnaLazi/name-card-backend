@@ -43,7 +43,7 @@ const routeMedia = {
 }
 
 const routeProfile = {
-    ID: "/:id",
+    HOME: "/",
 }
 
 const route = {
