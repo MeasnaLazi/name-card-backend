@@ -31,7 +31,8 @@ const routeNameCard = {
 
 const routeAccount = {
     HOME: "/",
-    LOGIN: "/login"
+    LOGIN: "/login",
+    LOGIN_REFRESH_TOKEN: "/login-refresh-token"
 }
 
 const routeScan = {

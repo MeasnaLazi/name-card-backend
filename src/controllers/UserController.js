@@ -7,8 +7,8 @@ const login = (req, res) => {
     const response = initializeResponse();
 
     userService.login(username, password)
-                .then(token => {
-                    setResponseWithData(response, 200, "Login successful!", { token: token });
+                .then(dataToken => {
+                    setResponseWithData(response, 200, "Login successful!", dataToken);
                 })
                 .catch(err => {
                     setUnauthorizedError(response, textMessage.INVALID_USER_PASSWORD);
@@ -18,6 +18,23 @@ const login = (req, res) => {
                 })
 }
 
+const loginWithRefreshToken = (req, res) => {
+    const { refresh_token } = req.body;
+    const response = initializeResponse();
+
+    userService.loginWithRefreshToken(refresh_token)
+                .then(dataToken => {
+                    setResponseWithData(response, 200, "Login successful!", dataToken);
+                })
+                .catch(err => {
+                    setUnauthorizedError(response, textMessage.INVALID_REFRESH_TOKEN);
+                })
+                .finally(() => {
+                    sendResponse(res, response)
+                })
+}
+
 module.exports = {
     login,
+    loginWithRefreshToken
 }

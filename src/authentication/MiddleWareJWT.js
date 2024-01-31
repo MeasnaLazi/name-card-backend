@@ -6,6 +6,7 @@ const createMiddlewareJWT = () => {
                 path: [
                     // /\/api\/v1\/account*/,
                     "/api/v1/accounts/login",
+                    "/api/v1/accounts/login-refresh-token",
                     /\/image*/,
                 ],
             });

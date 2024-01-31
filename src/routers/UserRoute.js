@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.route(route.ACCOUNT.LOGIN)
     .put(userController.login)
+router.route(route.ACCOUNT.LOGIN_REFRESH_TOKEN)
+    .put(userController.loginWithRefreshToken)
     
 module.exports = router;
 
